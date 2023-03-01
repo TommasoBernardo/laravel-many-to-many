@@ -16,6 +16,7 @@
                     <th scope="col">Title</th>
                     <th scope="col">Author</th>
                     <th scope="col">date</th>
+                    <th scope="col">technology</th>
                     <th scope="col">
                         <a href="{{ route('admin.posts.create') }}" class="btn btn-primary">create a new project</a>
                     </th>
@@ -28,6 +29,13 @@
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->author }}</td>
                         <td>{{ $post->date }}</td>
+                        <td>
+                            @forelse ($post->technologies as $technology)
+                                {{ $technology->name }}
+                            @empty
+                                no technology
+                            @endforelse
+                        </td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('admin.posts.show', $post->slug) }}">Show</a>
 

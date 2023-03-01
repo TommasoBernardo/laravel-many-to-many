@@ -24,6 +24,11 @@
         <label for="title" class="form-label">Technologies</label>
         @foreach ($technologies as $technology)
             <input type="checkbox" class="form-check-input" name="technologies[]" value="{{ $technology->id }}">
+            @if ($errors->any())
+                @checked(in_array($technology->id, old('technologies', [])))
+            @else
+                @checked($post->technologies->contains($technology->id))
+            @endif
             <label class="form-check-label">{{ $technology->name }}</label>
         @endforeach
 
