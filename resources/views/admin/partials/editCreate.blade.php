@@ -20,6 +20,14 @@
         Autore: {{ Auth::user()->name }}
     </h4>
 
+    <div class="mb-3">
+        <label for="title" class="form-label">Technologies</label>
+        @foreach ($technologies as $technology)
+            <input type="checkbox" class="form-check-input" name="technologies[]" value="{{ $technology->id }}">
+            <label class="form-check-label">{{ $technology->name }}</label>
+        @endforeach
+
+    </div>
 
     <div class="mb-3">
         <label for="post_type" class="form-label">Type</label>

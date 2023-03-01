@@ -9,6 +9,7 @@ use App\Models\Type;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Models\Technology;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -19,7 +20,8 @@ class PostController extends Controller
         'date' => 'required',
         'content' => 'required',
         'image' => 'required|image',
-        'type_id' => 'required|exists:types,id'
+        'type_id' => 'required|exists:types,id',
+        'technologies' => 'array|exists:technologies,id'
     ];
     /**
      * Display a listing of the resource.
@@ -39,7 +41,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create', ["post" => new Post(),  'types' => Type::all()]);
+        return view('admin.posts.create', ["post" => new Post(),  'types' => Type::all(), 'technologies' => Technology::all()]);
     }
 
     /**
@@ -57,6 +59,7 @@ class PostController extends Controller
         $newPost = new Post();
         $newPost->fill($data);
         $newPost->save();
+        $newPost->technologies()->sync($data['technologies']);
 
         return redirect()->route('admin.posts.index')->with('message', "$newPost->title created success");
     }
@@ -80,7 +83,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'), ['types' => Type::all()]);
+        return view('admin.posts.edit', compact('post'), ['types' => Type::all(), 'technologies' => Technology::all()]);
     }
 
     /**
