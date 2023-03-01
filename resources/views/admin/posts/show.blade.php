@@ -7,6 +7,14 @@
                 {{ $post->author }} | | {{ $post->type->name }}
             </div>
             <div class="card-body">
+                <div>
+                    @foreach ($post->technologies as $technology)
+                        <span class="badge rounded-pill p-3"
+                            style="background-color: {{ $technology->bg_color }}; color: {{ $technology->accent_color }}">
+                            {{ $technology->name }}
+                        </span>
+                    @endforeach
+                </div>
                 <h5 class="card-title">{{ $post->title }}</h5>
                 <div class="card-image">
                     @if ($post->isImageUrl())
