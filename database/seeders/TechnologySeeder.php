@@ -17,7 +17,7 @@ class TechnologySeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        $technologies = ['Front-end', 'Back-end', 'Full-stack'];
+        $technologies = ['HTML5', 'CSS3', 'JS', 'PHP', 'Vue 3', 'Laravel 9', 'Bootstrap', 'Vite', 'Composer', 'NPM', 'Node.js', 'SCSS'];
 
         foreach ($technologies as $technologyName) {
             $technology = new Technology();
